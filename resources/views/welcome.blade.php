@@ -89,6 +89,7 @@
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
             </div>
+
             <span class="nav-link-text ms-1">Sign In</span>
           </a>
         </li>
@@ -125,6 +126,15 @@
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign In</span>
               </a>
+              <form method="POST" action="{{ route('logout') }}">
+                          @csrf
+
+                          <x-dropdown-link :href="route('logout')"
+                                  onclick="event.preventDefault();
+                                              this.closest('form').submit();">
+                              {{ __('Log Out') }}
+                          </x-dropdown-link>
+                      </form>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
