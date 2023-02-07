@@ -1,7 +1,10 @@
 <?php
 
+
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +17,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+# index
+
+Route::get('/complaint', 'App\Http\Controllers\ComplaintController@index')->name('complaint');
+
+Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('category');
+
+
+route::get('/', function () {
     return view('welcome');
 });
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
