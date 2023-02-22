@@ -46,8 +46,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/dashboard.html "
-        target="_blank">
+      <a class="navbar-brand m-0">
         <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Dashboard</span>
       </a>
@@ -65,12 +64,21 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/tables.html">
+          <a class="nav-link " href="/complaint">
             <div
               class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+              <i class="ni ni-satisfied text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Tables</span>
+            <span class="nav-link-text ms-1">Complaint Data</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/categories">
+            <div
+              class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tag text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Categories Data</span>
           </a>
         </li>
         <li class="nav-item">
@@ -87,13 +95,13 @@
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
         <!-- <li class="nav-item">
-          <a class="nav-link " href="route('profile.edit')">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1"> {{ __('Profile') }}</span>
-          </a>
-        </li> -->
+            <a class="nav-link " href="route('profile.edit')">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1"> {{ __('Profile') }}</span>
+            </a>
+          </li> -->
         <li class="nav-item">
           <x-dropdown-link class="nav-link" :href="route('profile.edit')">
 
@@ -112,7 +120,7 @@
             @csrf
 
             <x-dropdown-link class="d-sm-inline d-none" :href="route('logout')" onclick="event.preventDefault();
-                                    this.closest('form').submit();">
+                                      this.closest('form').submit();">
               {{ __('Log Out') }}
             </x-dropdown-link>
           </form>

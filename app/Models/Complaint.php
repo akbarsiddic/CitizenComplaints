@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Complaint extends Model
 {
+    protected $fillable = [
+    'title',
+    'description',
+    'category_id',
+    'status'
+];
+
     use HasFactory;
 }

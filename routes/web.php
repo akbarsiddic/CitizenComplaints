@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComplaintController;
 
 
 
@@ -18,8 +19,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 # index
-
 Route::get('/complaint', 'App\Http\Controllers\ComplaintController@index')->name('complaint');
+Route::get('/complaints/{id}', 'ComplaintController@show');
+# create
+Route::get('/complaint/create', 'App\Http\Controllers\ComplaintController@create')->name('complaint.create');
+#store
+Route::post('/complaint', 'App\Http\Controllers\ComplaintController@store')->name('complaint.store');
+#destroy
+Route::delete('/complaint/{id}', 'App\Http\Controllers\ComplaintController@destroy')->name('complaint.destroy');
+#edit
+Route::get('/complaint/{id}/edit', 'App\Http\Controllers\ComplaintController@edit')->name('complaint.edit');
+#update
+Route::patch('/complaint/{id}', 'App\Http\Controllers\ComplaintController@update')->name('complaint.update');
+
 
 Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('category');
 
