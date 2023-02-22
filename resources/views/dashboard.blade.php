@@ -29,15 +29,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @foreach (App\Models\Complaint::where(['user_id'=>Auth::id()])->get() as $key => $item)
                                 <tr>
-                                    <td class="text-xs font-weight-bold mb-0"></td>
-                                    <td class="text-xs font-weight-bold mb-0"></td>
-                                    <td class="text-xs font-weight-bold mb-0"></td>
-                                    <td class="text-xs font-weight-bold mb-0"></td>
+
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->title}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->category->name}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->created_at}}</td>
+                                    <td class="text-xs  font-weight-bold mb-0">{{$item->status}}</td>
 
                                 </tr>
-
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Complaint;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class ComplaintController extends Controller
 {
     # index
@@ -32,9 +32,16 @@ class ComplaintController extends Controller
             'title' => 'required',
             'description' => 'required',
             'category_id' => 'required',
+            
         ]);
 
-        Complaint::create($request->all());
+        Complaint::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'category_id' => $request->category_id,
+            'status' => 'pending',
+            'user_id' => Auth::id()
+        ]);
 
         return redirect()->route('complaint')
             ->with('success', 'Complaint created successfully.');

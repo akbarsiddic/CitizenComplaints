@@ -11,8 +11,13 @@ class Complaint extends Model
     'title',
     'description',
     'category_id',
-    'status'
+    'status',
+    'user_id'
 ];
 
     use HasFactory;
+      public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
