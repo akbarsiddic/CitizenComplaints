@@ -33,9 +33,15 @@
                                         Category</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At</th>
+                                    @if (Auth::user()->role == 'petugas')
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    </th>
+                                    @endif
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        @if (Auth::user()->role == 'admin')
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        @endif
 
 
                                 </tr>
@@ -58,14 +64,25 @@
                                             data-description="{{ $complaint->description }}"
                                             data-status="{{ $complaint->status }}" data-bs-toggle="modal"
                                             data-bs-target="#desModal">Description</button></td>
-                                    {{-- @if (Auth::user()->role == 'admin') --}}
+
+                                    @if (Auth::user()->role == 'petugas')
+                                    <td class="text-xs font-weight-bold mb-0"><button
+                                            class="btn btn-success description-btn" data-id="{{ $complaint->id }}"
+                                            data-status="{{ $complaint->status }}" data-bs-toggle="modal"
+                                            data-bs-target="#statusModal"
+                                            data-url="{{ route('complaint.update', ['id' => $complaint->id]) }}">Edit</button>
+                                    </td>
+                                    @endif
+                                    @if (Auth::user()->role == 'admin')
                                     <td class="text-xs font-weight-bold mb-0"><button
                                             class="btn btn-success description-btn" data-id="{{ $complaint->id }}"
                                             data-title="{{ $complaint->title }}"
                                             data-category_id="{{ $complaint->category_id }}"
                                             data-description="{{ $complaint->description }}"
                                             data-status="{{ $complaint->status }}" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">Edit</button></td>
+                                            data-bs-target="#editModal"
+                                            data-url="{{ route('complaint.update', ['id' => $complaint->id]) }}">Edit</button>
+                                    </td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         <form action="{{ route('complaint.destroy', $complaint->id) }}" method="POST">
                                             @csrf
@@ -73,7 +90,7 @@
                                             <button type="submit" class="btn btn-danger description-btn">Delete</button>
                                         </form>
                                     </td>
-                                    {{-- @endif --}}
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -87,18 +104,47 @@
 
 </div>
 
-
-{{-- description modal --}}
+{{-- desc modal --}}
 <div class="modal fade" id="desModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="updateDataLabel" aria-hidden="true">
-    <div class="modal-dialog" id="updateDialog">
-        <div id="modal-content" class="modal-content">
-            <div class="modal-body" id="modal-content">
-                Loading..
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div id="modal-content">
+                <div class="modal-body" id="modal-content">
+                    ...
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="card">
+
+                <div class="modal-body">
+                    Terjadi keramaian yang menyebabkan
+                    blablablablablalablablablablbalbalblablbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawawawawaaaaaaaaaaa
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
+
 {{-- add modal --}}
 <div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="updateDataLabel" aria-hidden="true">
@@ -156,6 +202,17 @@
         </div>
     </div>
 </div>
+{{-- edit status --}}
+<div class="modal fade" id="statusModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="updateDataLabel" aria-hidden="true">
+    <div class="modal-dialog" id="updateDialog">
+        <div id="modal-status" class="modal-content">
+            <div class="modal-body" id="modal-status">
+                Loading..
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
@@ -177,15 +234,16 @@
                         <h5 class="modal-title" id="staticBackdropLabel">Complaint Description</h5>
                         <button type="button" class="btn btn-dark " data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
-                    <div class="modal-body ">
+                    <div class="card">
+                    <div class="modal-body">
                         ${$(e.relatedTarget).data('description')}
+                    </div>
                     </div>
                     <div class="modal-footer">
                         <span class="badge ${statusClass}">${status}</span>
                     </div>
-                </div>
-                </div>
-                </div>
+                
+                
             `;
 
             $('#modal-content').html(html);
@@ -198,6 +256,7 @@
         
 </script>
 {{-- script edit --}}
+@if (Auth::user()->role == 'admin')
 <script>
     $('#editModal').on('shown.bs.modal', function(e) {
         var id = $(e.relatedTarget).data('id');
@@ -205,14 +264,14 @@
         var category_id = $(e.relatedTarget).data('category_id');
         var description = $(e.relatedTarget).data('description');
         var status = $(e.relatedTarget).data('status');
-
-var html = `
+        var url = $(e.relatedTarget).data('url');
+        var html = `
         <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">Edit Complaint</h5>
             <button type="button" class="btn btn-dark " data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('complaint.update', ['id' => $complaint->id]) }}" method="POST">
+            <form action="${url}" method="POST">
                 @csrf
                 @method('PATCH')
                 <input type="hidden" name="id" value="${id}">
@@ -237,7 +296,7 @@ var html = `
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <select class="form-select" id="status" name="status" required>
-                        <option value="">Select Option...</option>
+                        <option value="${status}">Select Option...</option>
                         <option value="pending" ${status=='pending' ? 'selected' : '' }>Pending</option>
                         <option value="in progress" ${status=='in progress' ? 'selected' : '' }>In Progress</option>
                         <option value="closed" ${status=='closed' ? 'selected' : '' }>Closed</option>
@@ -245,7 +304,7 @@ var html = `
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary" >Save</button>
                 </div>
             </form>
         </div>
@@ -253,15 +312,57 @@ var html = `
             <p>akbarsiddiq</p>
         </div>
      </div>                   
-`;
+        `;
 
-$('#modal-edit').html(html);
-
-
+    $('#modal-edit').html(html);
 
 
-});
+
+
+        });
 </script>
+@endif
+
+
+@if (Auth::user()->role == 'petugas')
+<script>
+    $('#statusModal').on('shown.bs.modal', function(e) {
+        var status = $(e.relatedTarget).data('status');
+        var url = $(e.relatedTarget).data('url');
+
+        var html=`<div class="modal-header">
+            Change Status
+            </div>
+            <div class="modal-body">
+                <form action="${url}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="${status}">Select Option...</option>
+                            <option value="pending" ${status=='pending' ? 'selected' : '' }>Pending</option>
+                            <option value="in progress" ${status=='in progress' ? 'selected' : '' }>In Progress</option>
+                            <option value="closed" ${status=='closed' ? 'selected' : '' }>Closed</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <p>akbarsiddiq</p>
+                </div>`
+
+                $('#modal-status').html(html);
+            
+    });
+</script>
+@endif
+
+
 <script>
     $(function() {
         $('#complaint-form').submit(function(event) {

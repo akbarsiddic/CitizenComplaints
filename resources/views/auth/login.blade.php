@@ -40,12 +40,15 @@
     <div class="row">
       <div class="col-12">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
+        <nav
+          class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
           <div class="container-fluid">
             <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="/">
               Login
             </a>
-            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-icon mt-2">
                 <span class="navbar-toggler-bar bar1"></span>
                 <span class="navbar-toggler-bar bar2"></span>
@@ -61,7 +64,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link me-2" href="../pages/profile.html">
+                  <a class="nav-link me-2" href="/profile">
                     <i class="fa fa-user opacity-6 text-dark me-1"></i>
                     Profile
                   </a>
@@ -79,7 +82,7 @@
                   </a>
                 </li>
               </ul>
-              
+
             </div>
           </div>
         </nav>
@@ -99,25 +102,27 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                  <!-- Session Status -->
+                  <x-auth-session-status class="mb-4" :status="session('status')" />
                   <form role="form" method="POST" action="{{ route('login') }}">
-                     @csrf
+                    @csrf
                     <div class="mb-3">
-                      <input type="email" for="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" :value="__('Email')">
-                       <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                      <input type="email" for="email" id="email" name="email" class="form-control form-control-lg"
+                        placeholder="Email" aria-label="Email" :value="__('Email')">
+                      <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div class="mb-3">
-                      <input for="password" id="password" type="password" name="password" :value="__('Password')" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input for="password" id="password" type="password" name="password" :value="__('Password')"
+                        class="form-control form-control-lg" placeholder="Password" aria-label="Password">
                     </div>
                     <div for="remember_me" class="form-check form-switch">
                       <input id="remember_me" name="remember" class="form-check-input" type="checkbox" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">{{ __('Remember me') }}</label>
                     </div>
                     <x-primary-button class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">
-                {{ __('Log in') }}
-            </x-primary-button>
+                      {{ __('Log in') }}
+                    </x-primary-button>
                   </form>
 
 
@@ -130,12 +135,16 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
+            <div
+              class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+              <div
+                class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
           background-size: cover;">
                 <span class="mask bg-gradient-primary opacity-6"></span>
                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new currency"</h4>
-                <p class="text-white position-relative">The more effortless the writing looks, the more effort the writer actually put into the process.</p>
+                <p class="text-white position-relative">The more effortless the writing looks, the more effort the
+                  writer actually put into the process.</p>
               </div>
             </div>
           </div>
@@ -166,49 +175,50 @@
 </html>
 
 {{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+  <!-- Session Status -->
+  <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+  <form method="POST" action="{{ route('login') }}">
+    @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <!-- Email Address -->
+    <div>
+      <x-input-label for="email" :value="__('Email')" />
+      <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+        autofocus />
+      <x-input-error :messages="$errors->get('email')" class="mt-2" />
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <!-- Password -->
+    <div class="mt-4">
+      <x-input-label for="password" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+      <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
+        autocomplete="current-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+      <x-input-error :messages="$errors->get('password')" class="mt-2" />
+    </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
+    <!-- Remember Me -->
+    <div class="block mt-4">
+      <label for="remember_me" class="inline-flex items-center">
+        <input id="remember_me" type="checkbox"
+          class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+        <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+      </label>
+    </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+    <div class="flex items-center justify-end mt-4">
+      @if (Route::has('password.request'))
+      <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        href="{{ route('password.request') }}">
+        {{ __('Forgot your password?') }}
+      </a>
+      @endif
 
-            <x-primary-button class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
+      <x-primary-button class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">
+        {{ __('Log in') }}
+      </x-primary-button>
+    </div>
+  </form>
 </x-guest-layout> --}}

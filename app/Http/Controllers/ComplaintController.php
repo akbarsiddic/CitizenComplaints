@@ -15,6 +15,7 @@ class ComplaintController extends Controller
         $complaints = DB::table('complaints')
             ->join('categories', 'complaints.category_id', '=', 'categories.id')
             ->select('complaints.*', 'categories.name as category_name')
+            ->orderBy('complaints.id', 'desc')
             ->get();
         return view('complaint', compact('complaints'));
     }
@@ -32,7 +33,6 @@ class ComplaintController extends Controller
             'title' => 'required',
             'description' => 'required',
             'category_id' => 'required',
-            
         ]);
 
         Complaint::create([
@@ -40,10 +40,11 @@ class ComplaintController extends Controller
             'description' => $request->description,
             'category_id' => $request->category_id,
             'status' => 'pending',
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
         ]);
 
-        return redirect()->route('complaint')
+        return redirect()
+            ->route('complaint')
             ->with('success', 'Complaint created successfully.');
     }
 
@@ -52,7 +53,8 @@ class ComplaintController extends Controller
     {
         Complaint::find($id)->delete();
 
-        return redirect()->route('complaint')
+        return redirect()
+            ->route('complaint')
             ->with('success', 'Complaint deleted successfully');
     }
 
@@ -64,22 +66,21 @@ class ComplaintController extends Controller
     }
 
     #update
-public function update(Request $request, $id)
-{
-    // dd($request->all());
-    $request->validate([
-        'title' => 'required',
-        'description' => 'required',
-        'category_id' => 'required',
-        'status' => 'required'
-    ]);
+    public function update(Request $request, $id)
+    {
+        // dd($request->all());
+        // $request->validate([
+        //     'title' => 'required',
+        //     'description' => 'required',
+        //     'category_id' => 'required',
+        //     'status' => 'required',
+        // ]);
 
-    $complaint = Complaint::find($id);
-    $complaint->update($request->except('_token', '_method'));
+        $complaint = Complaint::find($id);
+        $complaint->update($request->except('_token', '_method'));
 
-    return redirect()->route('complaint')
-        ->with('success', 'Complaint updated successfully.');
-}
-
-
+        return redirect()
+            ->route('complaint')
+            ->with('success', 'Complaint updated successfully.');
+    }
 }
