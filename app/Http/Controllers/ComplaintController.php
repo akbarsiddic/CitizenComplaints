@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Complaint;
+use Illuminate\Support\Facades\Storage;
+use App\Notifications\ComplaintResolved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +36,14 @@ class ComplaintController extends Controller
             'title' => 'required',
             'description' => 'required',
             'category_id' => 'required',
+            'image' => 'image|mimes:png,jpg|max:2048', // add image validation rules
         ]);
+
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('public/images');
+            $imagePath = Storage::url($imagePath);
+        }
 
         Complaint::create([
             'title' => $request->title,
@@ -41,6 +51,7 @@ class ComplaintController extends Controller
             'category_id' => $request->category_id,
             'status' => 'pending',
             'user_id' => Auth::id(),
+            'image' => $imagePath, // save image path to the database
         ]);
 
         return redirect()
@@ -78,6 +89,13 @@ class ComplaintController extends Controller
 
         $complaint = Complaint::find($id);
         $complaint->update($request->except('_token', '_method'));
+
+        if ($complaint->status == 'resolved') {
+            $user = User::find($complaint->user_id);
+            if ($user && $user->email) {
+                $user->notify(new ComplaintResolved($complaint));
+            }
+        }
 
         return redirect()
             ->route('complaint')

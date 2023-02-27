@@ -9,7 +9,7 @@
             Write Your Complaint
         </div>
         <div class="card-body">
-            <form action="{{ route('complaint.store') }}" method="POST">
+            <form action="{{ route('complaint.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
@@ -28,6 +28,11 @@
                 <div class="mb-3">
                     <label for="description" class="form-label">Complaint Description</label>
                     <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Complaint Image</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/jpeg, image/png"
+                        required>
                 </div>
 
 
@@ -62,6 +67,8 @@
                                         Created At</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Status</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    </th>
 
 
                                 </tr>
@@ -78,12 +85,17 @@
                                         <span class="badge bg-danger mx-o">{{$item->status}}</span>
                                         @elseif ($item->status == 'in progress')
                                         <span class="badge bg-primary">{{$item->status}}</span>
+                                        @elseif ($item->status == 'resolved')
+                                        <span class="badge bg-warning">{{$item->status}}</span>
                                         @elseif ($item->status == 'closed')
                                         <span class="badge bg-success">{{$item->status}}</span>
                                         @else
                                         <span class="badge bg-secondary">{{$item->status}}</span>
                                         @endif
                                     </td>
+                                    <td class="text-xs font-weight-bold mb-0"><a
+                                            href="{{ route('comment', ['id' => $item->id]) }}"
+                                            class="btn btn-info description-btn">Comment</a></td>
 
                                 </tr>
                                 @endforeach
@@ -243,6 +255,8 @@
                                         <span class="badge bg-danger mx-o">{{$item->status}}</span>
                                         @elseif ($item->status == 'in progress')
                                         <span class="badge bg-primary">{{$item->status}}</span>
+                                        @elseif ($item->status == 'resolved')
+                                        <span class="badge bg-warning">{{$item->status}}</span>
                                         @elseif ($item->status == 'closed')
                                         <span class="badge bg-success">{{$item->status}}</span>
                                         @else

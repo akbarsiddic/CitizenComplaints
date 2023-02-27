@@ -18,8 +18,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{url('assets/img/apple-icon.png')}}">
+  <link rel="icon" type="image/png" href="{{url('assets/img/favicon.png')}}">
   <title>
     Citizen Complaints Web
   </title>
@@ -44,7 +44,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0">
-        <img src="../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{url('assets/img/logo-ct-dark.png')}}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Dashboard</span>
       </a>
     </div>
@@ -79,12 +79,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/billing.html">
+          <a class="nav-link " href="/logs">
             <div
               class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-info text-sm opacity-10"></i>
+              <i class="ni ni-archive-2 text-info text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Billing</span>
+            <span class="nav-link-text ms-1">Logs</span>
           </a>
         </li>
 
@@ -295,21 +295,35 @@
     <div class="container-fluid py-4">
 
       <div class="card" style="width: 18rem;">
-        <img src="../assets/img/carousel-1.jpg" class="card-img" alt="...">
+        <img src="{{url('assets/img/carousel-1.jpg')}}" class="card-img" alt="...">
       </div>
     </div>
 
     @if (Auth::user())
-
-
-
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         @yield('content')
       </div>
     </div>
+    @endif
 
-
+    @if (Auth::guest())
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="card text-center shadow-lg m-4">
+        <div class="card-body">
+          <h1 class="card-title mb-4">Welcome to Citizen Complaints</h1>
+          <p class="card-text mb-4">This website provides a platform for citizens to voice their concerns and complaints
+            about
+            issues in their community. Whether it's a pothole, noisy neighbor, or safety hazard, we want to hear from
+            you!
+          </p>
+          <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+            <a class="btn btn-lg btn-primary" href="{{ route('register') }}" role="button">Sign Up</a>
+            <a class="btn btn-lg btn-outline-primary" href="{{ route('login') }}" role="button">Log In</a>
+          </div>
+        </div>
+      </div>
+    </div>
     @endif
 
   </main>

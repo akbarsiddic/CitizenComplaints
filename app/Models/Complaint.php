@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Complaint extends Model
 {
     protected $fillable = [
-    'title',
-    'description',
-    'category_id',
-    'status',
-    'user_id'
-];
+        'title',
+        'description',
+        'image',
+        'category_id',
+        'status',
+        'user_id',
+    ];
 
     use HasFactory;
-      public function category()
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }

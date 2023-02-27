@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
         '/complaint',
         'App\Http\Controllers\ComplaintController@index'
     )->name('complaint');
+
     Route::get('/complaints/{id}', 'ComplaintController@show');
     # create
     Route::get(
@@ -78,6 +79,20 @@ Route::middleware('auth')->group(function () {
         '/categories',
         'App\Http\Controllers\CategoryController@index'
     )->name('category');
+
+    Route::get(
+        '/dashboard/comment/{id}',
+        'App\Http\Controllers\CommentController@index'
+    )->name('comment');
+    Route::post(
+        '/dashboard/comment/{id}',
+        'App\Http\Controllers\CommentController@store'
+    )->name('comment.store');
+
+    #logs
+    Route::get('/logs', 'App\Http\Controllers\LogController@index')
+        ->middleware('auth', 'role:admin')
+        ->name('logs');
 });
 
 require __DIR__ . '/auth.php';

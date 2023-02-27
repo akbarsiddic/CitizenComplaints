@@ -33,12 +33,15 @@
                                         Category</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Created At</th>
-                                    @if (Auth::user()->role == 'petugas')
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                    </th>
-                                    @endif
+
+                                        @if (Auth::user()->role == 'petugas')
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        @endif
+
                                         @if (Auth::user()->role == 'admin')
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         @endif
@@ -62,8 +65,8 @@
                                     <td class="text-xs font-weight-bold mb-0"><button
                                             class="btn btn-primary description-btn"
                                             data-description="{{ $complaint->description }}"
-                                            data-status="{{ $complaint->status }}" data-bs-toggle="modal"
-                                            data-bs-target="#desModal">Description</button></td>
+                                            data-status="{{ $complaint->status }}" data-image="{{$complaint->image}}"
+                                            data-bs-toggle="modal" data-bs-target="#desModal">Description</button></td>
 
                                     @if (Auth::user()->role == 'petugas')
                                     <td class="text-xs font-weight-bold mb-0"><button
@@ -72,8 +75,12 @@
                                             data-bs-target="#statusModal"
                                             data-url="{{ route('complaint.update', ['id' => $complaint->id]) }}">Edit</button>
                                     </td>
-                                    @endif
-                                    @if (Auth::user()->role == 'admin')
+                                    <td class="text-xs font-weight-bold mb-0"><a
+                                            href="{{ route('comment', ['id' => $complaint->id]) }}"
+                                            class="btn btn-info description-btn">Comment</a></td>
+                                    <td class="text-xs font-weight-bold mb-0">
+                                        @endif
+                                        @if (Auth::user()->role == 'admin')
                                     <td class="text-xs font-weight-bold mb-0"><button
                                             class="btn btn-success description-btn" data-id="{{ $complaint->id }}"
                                             data-title="{{ $complaint->title }}"
@@ -83,6 +90,9 @@
                                             data-bs-target="#editModal"
                                             data-url="{{ route('complaint.update', ['id' => $complaint->id]) }}">Edit</button>
                                     </td>
+                                    <td class="text-xs font-weight-bold mb-0"><a
+                                            href="{{ route('comment', ['id' => $complaint->id]) }}"
+                                            class="btn btn-info description-btn">Comment</a></td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         <form action="{{ route('complaint.destroy', $complaint->id) }}" method="POST">
                                             @csrf
@@ -120,30 +130,7 @@
     </div>
 </div>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="card">
 
-                <div class="modal-body">
-                    Terjadi keramaian yang menyebabkan
-                    blablablablablalablablablablbalbalblablbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawawawawaaaaaaaaaaa
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 {{-- add modal --}}
 <div class="modal fade" id="addModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -158,7 +145,7 @@
 
 
                 <div class="modal-body ">
-                    <form action="{{ route('complaint.store') }}" method="POST">
+                    <form action="{{ route('complaint.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="title" class="form-label">Title</label>
@@ -179,8 +166,11 @@
                             <textarea class="form-control" id="description" name="description" rows="5"
                                 required></textarea>
                         </div>
-
-
+                        <div class="mb-3">
+                            <label for="image" class="form-label">Complaint Image</label>
+                            <input type="file" class="form-control" id="image" name="image"
+                                accept="image/jpeg, image/png" required>
+                        </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
@@ -226,18 +216,30 @@
         statusClass = "bg-danger";
         } else if (status === "in progress") {
         statusClass = "bg-primary";
+        } else if (status === "resolved") {
+        statusClass = "bg-warning";
         } else if (status === "closed") {
         statusClass = "bg-success";
         }
+
+        var imageUrl = $(e.relatedTarget).data('image');
+
             var html = `
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Complaint Description</h5>
                         <button type="button" class="btn btn-dark " data-bs-dismiss="modal" aria-label="Close">X</button>
                     </div>
                     <div class="card">
-                    <div class="modal-body">
-                        ${$(e.relatedTarget).data('description')}
-                    </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="${imageUrl}" class="card-img img-fluid" style="width: 100%;">
+                                </div>
+                                <div class="col-md-6">
+                                    ${$(e.relatedTarget).data('description')}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <span class="badge ${statusClass}">${status}</span>
@@ -299,6 +301,7 @@
                         <option value="${status}">Select Option...</option>
                         <option value="pending" ${status=='pending' ? 'selected' : '' }>Pending</option>
                         <option value="in progress" ${status=='in progress' ? 'selected' : '' }>In Progress</option>
+                        <option value="resolved" ${status=='resolved' ? 'selected' : '' }>Resolved</option>
                         <option value="closed" ${status=='closed' ? 'selected' : '' }>Closed</option>
                     </select>
                 </div>
@@ -343,6 +346,7 @@
                             <option value="${status}">Select Option...</option>
                             <option value="pending" ${status=='pending' ? 'selected' : '' }>Pending</option>
                             <option value="in progress" ${status=='in progress' ? 'selected' : '' }>In Progress</option>
+                            <option value="resolved" ${status=='resolved' ? 'selected' : '' }>Resolved</option>
                             <option value="closed" ${status=='closed' ? 'selected' : '' }>Closed</option>
                         </select>
                     </div>
