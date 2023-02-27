@@ -28,6 +28,7 @@ class CommentController extends Controller
 
         return redirect()
             ->route('comment', $id)
-            ->with('success', 'Comment created successfully.');
+            ->with('success', 'Comment created successfully.')
+            ->with('toast_success', 'Your comment has been submitted!');
     }
 }

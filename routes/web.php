@@ -91,8 +91,12 @@ Route::middleware('auth')->group(function () {
 
     #logs
     Route::get('/logs', 'App\Http\Controllers\LogController@index')
-        ->middleware('auth', 'role:admin')
+        ->middleware('auth')
         ->name('logs');
+
+    Route::get('/logs/export', 'App\Http\Controllers\LogController@exportToPDF')
+        ->middleware('auth')
+        ->name('logs.export');
 });
 
 require __DIR__ . '/auth.php';

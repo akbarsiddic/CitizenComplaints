@@ -19,7 +19,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="{{url('assets/img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{url('assets/img/favicon.png')}}">
+  <link rel="icon" type="image/png" href="{{url('assets/img/logog.png')}}">
   <title>
     Citizen Complaints Web
   </title>
@@ -33,9 +33,11 @@
   <link href="{{url('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ url('assets/css/argon-dashboard.css') }}" rel="stylesheet" />
+  @include('sweetalert::alert')
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
+
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <aside
     class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
@@ -44,7 +46,7 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0">
-        <img src="{{url('assets/img/logo-ct-dark.png')}}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{url('assets/img/logog.png')}}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Dashboard</span>
       </a>
     </div>
@@ -84,7 +86,7 @@
               class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-archive-2 text-info text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">Logs</span>
+            <span class="nav-link-text ms-1">History</span>
           </a>
         </li>
 
@@ -158,9 +160,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">{{ request()->path(); }}</li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder text-white mb-0">{{ request()->path(); }}</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -184,7 +186,7 @@
 
             <ul class="navbar-nav  justify-content-end">
               <li class="nav-item d-flex align-items-center">
-                <a class="nav-link text-white font-weight-bold px-0">
+                <a href="/profile" class="nav-link text-white font-weight-bold px-0">
                   <i class="fa fa-user me-sm-1"></i>
                   <span class="d-sm-inline d-none">Hello {{ Auth::user()->name }} !</span>
                 </a>
@@ -203,8 +205,8 @@
                 </a>
               </li>
               <li class="nav-item px-3 d-flex align-items-center">
-                <a href="javascript:;" class="nav-link text-white p-0">
-                  <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                <a href="/profile" class="nav-link text-white p-0">
+                  <i class="fa fa-single fixed-plugin-button-nav cursor-pointer"></i>
                 </a>
               </li>
               <li class="nav-item dropdown pe-2 d-flex align-items-center">
@@ -292,12 +294,65 @@
       </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container-fluid py-4">
 
-      <div class="card" style="width: 18rem;">
-        <img src="{{url('assets/img/carousel-1.jpg')}}" class="card-img" alt="...">
+    @if (Auth::guest())
+    <div class="container-fluid py-4">
+      <div class="card" style="width: 28rem">
+        <img src="{{url('assets/img/landing.jpg')}}" class="card-img"
+          style="width: 100%; height: 100%; object-fit: cover;" alt="...">
       </div>
     </div>
+    @endif
+
+    @if (Auth::user())
+    <div class="d-flex container-fluid py-4 justify-content-around">
+      <div class="card" style="width: 18rem;">
+        <img src="{{url('assets/img/curved-images/curved6-small.jpg')}}" class="card-img" alt="...">
+      </div>
+      <div class="card bg-gradient-info shadow">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-white text-muted mb-2">In Progress Complaints</h6>
+              <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status', 'in progress')->count()
+                }}</span>
+            </div>
+            <div class="col-auto">
+              <div class="icon icon-shape bg-white text-info rounded-circle shadow">
+                <img src="{{url('assets/img/logog.jpg')}}" class=" rounded-circle"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            </div>
+          </div>
+          <p class="mt-3 mb-0 text-sm">
+            <span class="text-nowrap text-light">Let's hope it get resolved quickly</span>
+          </p>
+        </div>
+      </div>
+      <div class="card bg-gradient-warning shadow">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+              <h6 class="text-uppercase text-muted mb-2">Pending Complaints</h6>
+              <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status', 'pending')->count()
+                }}</span>
+            </div>
+            <div class="col-auto">
+              <div class="icon icon-shape bg-white text-info rounded-circle shadow">
+                <img src="{{url('assets/img/logog.jpg')}}" class=" rounded-circle"
+                  style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+            </div>
+          </div>
+          <p class="mt-3 mb-0 text-sm">
+
+            <span class="text-nowrap text-light">We will deal with it as soon as posible</span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+    @endif
 
     @if (Auth::user())
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

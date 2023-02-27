@@ -389,4 +389,15 @@
         });
     });
 </script>
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+@if (session('swal_success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session('swal_success') }}'
+    })
+</script>
+@endif
 @endsection

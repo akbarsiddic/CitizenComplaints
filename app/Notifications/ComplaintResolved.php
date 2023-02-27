@@ -48,16 +48,11 @@ class ComplaintResolved extends Notification
 
         return (new MailMessage())
             ->line('Your complaint has been resolved.')
-            ->action('View Complaint', $url)
+            ->line('You can now come to the site to add a comment about it.')
             ->line(
-                'If you are satisfied with the resolution, please click the button below to close the complaint.'
+                'If we do not receive further information from you within 24 hours, we will close the complaint.'
             )
-            ->action('Close Complaint', $url . '/close')
-            ->line(
-                'If you are not satisfied with the resolution, please click the button below to deny the complaint.'
-            )
-            ->action('Deny Complaint', $url . '/deny')
-            ->line('Thank you for using our application!');
+            ->action('View Complaint', $url);
     }
 
     /**

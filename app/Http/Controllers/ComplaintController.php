@@ -56,7 +56,8 @@ class ComplaintController extends Controller
 
         return redirect()
             ->route('complaint')
-            ->with('success', 'Complaint created successfully.');
+            ->with('success', 'Complaint created successfully.')
+            ->with('swal_success', 'Your complaint has been submitted!');
     }
 
     #destroy
