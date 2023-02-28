@@ -18,8 +18,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{url('assets/img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{url('assets/img/logog.png')}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{url('assets/img/legoo.png')}}">
+  <link rel="icon" type="image/png" href="{{url('assets/img/legoo.png')}}">
   <title>
     Citizen Complaints Web
   </title>
@@ -38,7 +38,7 @@
 
 <body class="g-sidenav-show   bg-gray-100">
 
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="min-height-300 bg-gradient-warning position-absolute w-100"></div>
   <aside
     class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
     id="sidenav-main">
@@ -46,8 +46,8 @@
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0">
-        <img src="{{url('assets/img/logog.png')}}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Dashboard</span>
+        <img src="{{url('assets/img/legoo.png')}}" class="navbar-brand-img" alt="main_logo">
+        <span class="ms-1 font-weight-bold">Citizen Complaint</span>
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -297,8 +297,8 @@
 
     @if (Auth::guest())
     <div class="container-fluid py-4">
-      <div class="card" style="width: 28rem">
-        <img src="{{url('assets/img/landing.jpg')}}" class="card-img" style="object-fit: cover;" alt="...">
+      <div class="card" style="width: 20rem">
+        <img src="{{url('assets/img/lannnd.png')}}" class="card-img" style="object-fit: cover;" alt="...">
       </div>
     </div>
     @endif
@@ -307,14 +307,14 @@
     <div class="container-fluid py-4">
       <div class="row justify-content-around">
         <div class="col-lg-4 mb-4 mb-lg-0">
-          <div class="card" style="14rem">
-            <img src="{{url('assets/img/curved-images/curved6-small.jpg')}}" class="card-img" alt="...">
+          <div class="card shadow">
+            <img src="{{url('assets/img/lannnd.png')}}" class="card-img" alt="...">
           </div>
         </div>
         <div class="col-lg-4 mb-4 mb-lg-0">
           <div class="card bg-gradient-info shadow">
             <div class="card-body">
-              <h6 class="text-uppercase text-white text-muted mb-2">In Progress Complaints</h6>
+              <h6 class="text-uppercase text-white  mb-2">In Progress Complaints</h6>
               <div class="row align-items-center">
                 <div class="col">
                   <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status','in progress')->count()
@@ -336,9 +336,9 @@
           </div>
         </div>
         <div class="col-lg-4 mb-4 mb-lg-0">
-          <div class="card bg-gradient-warning shadow">
+          <div class="card bg-gradient-danger shadow">
             <div class="card-body">
-              <h6 class="text-uppercase text-muted mb-2">Pending Complaints</h6>
+              <h6 class="text-uppercase text-white  mb-2">Pending Complaints</h6>
               <div class="row align-items-center">
                 <div class="col">
                   <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status', 'pending')->count()

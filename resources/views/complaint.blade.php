@@ -175,7 +175,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <p>akbarsiddiq</p>
+                    <p>Citizen Complaint</p>
                 </div>
             </div>
         </div>
@@ -312,7 +312,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <p>akbarsiddiq</p>
+            <p>Citizen Complaint</p>
         </div>
      </div>                   
         `;
@@ -357,7 +357,7 @@
                 </form>
                 </div>
                 <div class="modal-footer">
-                    <p>akbarsiddiq</p>
+                    <p>Citizen Complaint</p>
                 </div>`
 
                 $('#modal-status').html(html);

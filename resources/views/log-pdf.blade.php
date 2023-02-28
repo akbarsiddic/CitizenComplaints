@@ -12,7 +12,7 @@
         <h1>Logs Report</h1>
     </div>
     <div>
-        <table style="width: 100%;table-layout:fixed; border:1;">
+        <table border="1" style="width: 100%;table-layout:fixed;">
             <thead>
                 <tr>
 

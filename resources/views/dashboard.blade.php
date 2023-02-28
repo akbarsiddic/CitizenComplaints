@@ -38,7 +38,7 @@
 
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <div class="card-footer text-end">akbarsiddiq</div>
+            <div class="card-footer text-end">Citizen Complaint</div>
         </div>
     </div>
 </div>
