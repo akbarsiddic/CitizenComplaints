@@ -44,7 +44,6 @@ class LogController extends Controller
             ->get();
 
         $pdf = PDF::loadView('log-pdf', compact('logs'));
-        $pdf->setPaper('A4', 'landscape');
 
         return $pdf->download('log.pdf');
     }

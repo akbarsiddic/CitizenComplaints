@@ -298,59 +298,68 @@
     @if (Auth::guest())
     <div class="container-fluid py-4">
       <div class="card" style="width: 28rem">
-        <img src="{{url('assets/img/landing.jpg')}}" class="card-img"
-          style="width: 100%; height: 100%; object-fit: cover;" alt="...">
+        <img src="{{url('assets/img/landing.jpg')}}" class="card-img" style="object-fit: cover;" alt="...">
       </div>
     </div>
     @endif
 
     @if (Auth::user())
-    <div class="d-flex container-fluid py-4 justify-content-around">
-      <div class="card" style="width: 18rem;">
-        <img src="{{url('assets/img/curved-images/curved6-small.jpg')}}" class="card-img" alt="...">
-      </div>
-      <div class="card bg-gradient-info shadow">
-        <div class="card-body">
-          <div class="row align-items-center">
-            <div class="col">
+    <div class="container-fluid py-4">
+      <div class="row justify-content-around">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="card" style="14rem">
+            <img src="{{url('assets/img/curved-images/curved6-small.jpg')}}" class="card-img" alt="...">
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="card bg-gradient-info shadow">
+            <div class="card-body">
               <h6 class="text-uppercase text-white text-muted mb-2">In Progress Complaints</h6>
-              <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status', 'in progress')->count()
-                }}</span>
-            </div>
-            <div class="col-auto">
-              <div class="icon icon-shape bg-white text-info rounded-circle shadow">
-                <img src="{{url('assets/img/logog.jpg')}}" class=" rounded-circle"
-                  style="width: 100%; height: 100%; object-fit: cover;">
+              <div class="row align-items-center">
+                <div class="col">
+                  <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status','in progress')->count()
+                    }}</span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-white text-info rounded-circle shadow d-flex align-items-center justify-content-center">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center ">
+                      <i class="ni ni-send text-info text-lg opacity-10 m-auto"></i>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <p class="mt-3 mb-0 text-sm">
+                <span class="text-nowrap text-light">Let's hope it get resolved quickly</span>
+              </p>
             </div>
           </div>
-          <p class="mt-3 mb-0 text-sm">
-            <span class="text-nowrap text-light">Let's hope it get resolved quickly</span>
-          </p>
         </div>
-      </div>
-      <div class="card bg-gradient-warning shadow">
-        <div class="card-body">
-          <div class="row align-items-center">
-            <div class="col">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="card bg-gradient-warning shadow">
+            <div class="card-body">
               <h6 class="text-uppercase text-muted mb-2">Pending Complaints</h6>
-              <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status', 'pending')->count()
-                }}</span>
-            </div>
-            <div class="col-auto">
-              <div class="icon icon-shape bg-white text-info rounded-circle shadow">
-                <img src="{{url('assets/img/logog.jpg')}}" class=" rounded-circle"
-                  style="width: 100%; height: 100%; object-fit: cover;">
+              <div class="row align-items-center">
+                <div class="col">
+                  <span class="h2 font-weight-bold mb-0">{{ App\Models\Complaint::where('status', 'pending')->count()
+                    }}</span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-white text-info rounded-circle shadow d-flex align-items-center justify-content-center">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center ">
+                      <i class="ni ni-watch-time text-warning text-lg opacity-10 m-auto"></i>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <p class="mt-3 mb-0 text-sm">
+                <span class="text-nowrap text-light">We will deal with it as soon as possible</span>
+              </p>
             </div>
           </div>
-          <p class="mt-3 mb-0 text-sm">
-
-            <span class="text-nowrap text-light">We will deal with it as soon as posible</span>
-          </p>
         </div>
       </div>
-
     </div>
     @endif
 

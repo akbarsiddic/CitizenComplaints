@@ -1,0 +1,32 @@
+ <div class="text-center">
+        <h1>Logs Report</h1>
+    </div>
+
+    <div style="width:100%">
+        <table style="width:80%;margin:auto;">
+            <thead>
+                <tr>
+
+                    <th style="width:25%">Date</th>
+                    <th style="width:25%">User</th>
+                    <th style="width:25%">Title</th>
+                    {{-- <th>Category</th> --}}
+                    <th style="width:25%">Complaint Description</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($logs as $log)
+                <tr>
+
+                    <td style="width:25%">{{ $log->created_at }}</td>
+                    <td style="width:25%">{{ $log->name }}</td>
+                    <td style="width:25%">{{ $log->title }}</td>
+                    {{-- <td>{{ $log->category }}</td> --}}
+                    <td style="width:25%">{{ $log->complaint_description }}</td>
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>

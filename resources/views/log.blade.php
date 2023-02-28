@@ -3,11 +3,13 @@
 @section('content')
 
 <div class="container-fluid py-4">
+
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
-                <div class="card-header pb-0">
+                <div class="card-header pb-0 d-flex justify-content-between">
                     <h6>History</h6>
+                    <a href="logs/export" target="_blank" class="btn btn-danger align-item-end"> export</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -42,7 +44,6 @@
                     </div>
                 </div>
             </div>
-            <a href="logs/export" target="_blank" class="btn"> export</a>
         </div>
     </div>
 </div>
