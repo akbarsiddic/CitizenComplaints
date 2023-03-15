@@ -81,6 +81,16 @@ Route::middleware('auth')->group(function () {
     )->name('category');
 
     Route::get(
+        '/categories/create',
+        'App\Http\Controllers\CategoryController@create'
+    )->name('category.create');
+
+    Route::post(
+        '/categories',
+        'App\Http\Controllers\CategoryController@store'
+    )->name('category.store');
+
+    Route::get(
         '/dashboard/comment/{id}',
         'App\Http\Controllers\CommentController@index'
     )->name('comment');
@@ -93,6 +103,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/logs', 'App\Http\Controllers\LogController@index')
         ->middleware('auth')
         ->name('logs');
+
+    Route::get('/logs', 'App\Http\Controllers\LogController@index')
+        ->middleware('auth')
+        ->name('logs.index');
 
     Route::get('/logs/export', 'App\Http\Controllers\LogController@exportToPDF')
         ->middleware('auth')

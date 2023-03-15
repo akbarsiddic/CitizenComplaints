@@ -18,8 +18,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{url('assets/img/legoo.png')}}">
+  <link rel="icon" type="image/png" href="{{url('assets/img/legoo.png')}}">
   <title>
     Register
   </title>
@@ -84,7 +84,7 @@
   <!-- End Navbar -->
   <main class="main-content  mt-0">
     <div class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
-      style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg'); background-position: top;">
+      style="background-image: url('assets/img/pipel.jpg'); background-position: top;">
       <span class="mask bg-gradient-warning opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">

@@ -18,8 +18,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{url('assets/img/legoo.png')}}">
+  <link rel="icon" type="image/png" href="{{url('assets/img/legoo.png')}}">
   <title>
     Sign In
   </title>
@@ -139,7 +139,7 @@
               class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
               <div
                 class="position-relative bg-gradient-danger h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
+                style="background-image: url('assets/img/citizen.jpg');
           background-size: cover;">
                 <span class="mask bg-gradient-warning opacity-6"></span>
                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Speak Your Complaints about ANYTHING"

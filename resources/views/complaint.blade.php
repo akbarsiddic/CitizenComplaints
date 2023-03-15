@@ -62,11 +62,15 @@
                                     <td class="text-xs font-weight-bold mb-0">{{ $complaint->category_name }}</td>
                                     <td class="text-xs font-weight-bold mb-0">{{ $complaint->created_at }}</td>
 
+
                                     <td class="text-xs font-weight-bold mb-0"><button
                                             class="btn btn-primary description-btn"
                                             data-description="{{ $complaint->description }}"
                                             data-status="{{ $complaint->status }}" data-image="{{$complaint->image}}"
-                                            data-bs-toggle="modal" data-bs-target="#desModal">Description</button></td>
+                                            data-location="{{ $complaint->location_id }}" data-bs-toggle="modal"
+                                            data-bs-target="#desModal">Description</button>
+                                    </td>
+
 
                                     @if (Auth::user()->role == 'petugas')
                                     <td class="text-xs font-weight-bold mb-0"><button
@@ -166,6 +170,15 @@
                             <textarea class="form-control" id="description" name="description" rows="5"
                                 required></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <select class="form-select" name="location_id" id="location_id" class="form-control">
+                                <option value="">Select a location</option>
+                                @foreach ($locations as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Complaint Image</label>
                             <input type="file" class="form-control" id="image" name="image"
@@ -210,6 +223,29 @@
 {{-- script description --}}
 <script>
     $('#desModal').on('shown.bs.modal', function(e) {
+        var locationMap = {
+        1: "Jakarta",
+        2: "Bandung",
+        3: "Surabaya",
+        4: "Yogyakarta",
+        5: "Semarang",
+        6: "Malang",
+        7: "Solo",
+        8: "Cirebon",
+        9: "Banyuwangi",
+        10: "Garut",
+        11: "Tangerang",
+        12: "Bekasi",
+        13: "Bogor",
+        14: "Depok",
+        15: "Magelang",
+        16: "Purwokerto",
+        17: "Tasikmalaya",
+        18: "Cilacap",
+        19: "Pekalongan"
+        };
+        var loc = $(e.relatedTarget).data('location');
+        var locationName = locationMap[loc] || "Unknown location";
         var status = $(e.relatedTarget).data('status');
         var statusClass = "bg-secondary";
         if (status === "pending") {
@@ -227,21 +263,21 @@
             var html = `
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Complaint Description</h5>
-                        <button type="button" class="btn btn-dark " data-bs-dismiss="modal" aria-label="Close">X</button>
+                        <button type="button" class="btn-close btn btn-dark bg-dark" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="card">
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <img src="${imageUrl}" class="card-img img-fluid" style="width: 100%;">
-                                </div>
-                                <div class="col-md-6">
-                                    ${$(e.relatedTarget).data('description')}
-                                </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src="${imageUrl}" class="card-img img-fluid" style="width: 100%;">
+                            </div>
+                            <div class="col-md-6">
+                                <p>${$(e.relatedTarget).data('description')}</p>
+                                <p>Location: ${locationName}</p>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <span>Status: </span>
                         <span class="badge ${statusClass}">${status}</span>
                     </div>
                 

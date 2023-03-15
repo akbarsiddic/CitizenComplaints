@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Complaint;
+use App\Models\Location;
 use Illuminate\Support\Facades\Storage;
 use App\Notifications\ComplaintResolved;
 use Illuminate\Http\Request;
@@ -14,13 +15,15 @@ class ComplaintController extends Controller
     # index
     public function index()
     {
+        $locations = Location::all();
         # join categories table
         $complaints = DB::table('complaints')
             ->join('categories', 'complaints.category_id', '=', 'categories.id')
             ->select('complaints.*', 'categories.name as category_name')
             ->orderBy('complaints.id', 'desc')
             ->get();
-        return view('complaint', compact('complaints'));
+
+        return view('complaint', compact('complaints', 'locations'));
     }
 
     #create
@@ -35,6 +38,7 @@ class ComplaintController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'location_id' => 'nullable|exists:locations,id',
             'category_id' => 'required',
             'image' => 'image|mimes:png,jpg|max:2048', // add image validation rules
         ]);
@@ -49,6 +53,7 @@ class ComplaintController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'category_id' => $request->category_id,
+            'location_id' => $request->location_id,
             'status' => 'pending',
             'user_id' => Auth::id(),
             'image' => $imagePath, // save image path to the database

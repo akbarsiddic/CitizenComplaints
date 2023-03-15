@@ -15,13 +15,11 @@
         <table border="1" style="width: 100%;table-layout:fixed;">
             <thead>
                 <tr>
-
                     <th style="width:25%">Date</th>
                     <th style="width:25%">User</th>
                     <th style="width:25%">Title</th>
                     {{-- <th>Category</th> --}}
                     <th style="width:25%">Complaint Description</th>
-
                 </tr>
             </thead>
             <tbody>
