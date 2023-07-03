@@ -78,7 +78,7 @@
                                 <tr>
 
                                     <td class="text-xs font-weight-bold mb-0">{{$item->title}}</td>
-                                    <td class="text-xs font-weight-bold mb-0">{{$item->category->name}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->categories->name}}</td>
                                     <td class="text-xs font-weight-bold mb-0">{{$item->created_at}}</td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         @if ($item->status == 'pending')
@@ -142,7 +142,7 @@
                                 <tr>
 
                                     <td class="text-xs font-weight-bold mb-0">{{$item->title}}</td>
-                                    <td class="text-xs font-weight-bold mb-0">{{$item->category->name}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->categories->name}}</td>
                                     <td class="text-xs font-weight-bold mb-0">{{$item->created_at}}</td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         @if ($item->status == 'pending')
@@ -186,7 +186,7 @@
                                 <tr>
 
                                     <td class="text-xs font-weight-bold mb-0">{{$item->title}}</td>
-                                    <td class="text-xs font-weight-bold mb-0">{{$item->category->name}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->categories->name}}</td>
                                     <td class="text-xs font-weight-bold mb-0">{{$item->created_at}}</td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         @if ($item->status == 'in progress')
@@ -230,7 +230,7 @@
                                 <tr>
 
                                     <td class="text-xs font-weight-bold mb-0">{{$item->title}}</td>
-                                    <td class="text-xs font-weight-bold mb-0">{{$item->category->name}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->category_name}}</td>
                                     <td class="text-xs font-weight-bold mb-0">{{$item->created_at}}</td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         @if ($item->status == 'closed')
@@ -283,7 +283,7 @@
                                 <tr>
 
                                     <td class="text-xs font-weight-bold mb-0">{{$item->title}}</td>
-                                    <td class="text-xs font-weight-bold mb-0">{{$item->category->name}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->category_name}}</td>
                                     <td class="text-xs font-weight-bold mb-0">{{$item->created_at}}</td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         @if ($item->status == 'pending')
@@ -336,7 +336,7 @@
                                 <tr>
 
                                     <td class="text-xs font-weight-bold mb-0">{{$item->title}}</td>
-                                    <td class="text-xs font-weight-bold mb-0">{{$item->category->name}}</td>
+                                    <td class="text-xs font-weight-bold mb-0">{{$item->category_name}}</td>
                                     <td class="text-xs font-weight-bold mb-0">{{$item->created_at}}</td>
                                     <td class="text-xs font-weight-bold mb-0">
                                         @if ($item->status == 'pending')

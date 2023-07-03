@@ -53,7 +53,7 @@ class ComplaintController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'category_id' => $request->category_id,
-            'location_id' => $request->location_id,
+            'location_id' => 1,
             'status' => 'pending',
             'user_id' => Auth::id(),
             'image' => $imagePath, // save image path to the database
