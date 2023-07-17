@@ -10,6 +10,18 @@ Citizen Complaints adalah situs web tempat Anda dapat melaporkan masalah yang An
 
 **Server:** Laravel
 
+## Fitur
+
+- Otentikasi Pengguna: Warga dapat melakukan registrasi dan login untuk mengakses fitur-fitur aplikasi.
+- Penambahan Pengaduan: Pengguna dapat menambahkan pengaduan melalui formulir yang disediakan.
+- Pengiriman Pesan ke Admin: Admin menerima pesan pemberitahuan saat pengaduan ditambahkan.
+- Pelacakan Status Pengaduan: Pengguna dapat melihat status pengaduan yang telah mereka ajukan.
+- Manajemen Pengaduan: Admin dapat melihat dan mengelola pengaduan yang masuk.
+- Tindak Lanjut Pengaduan: Admin dapat menindaklanjuti pengaduan yang diajukan oleh pengguna.
+- Pemberitahuan Pembaruan: Pengguna menerima pemberitahuan saat ada pembaruan status atau tanggapan terhadap pengaduan mereka.
+- Penyelesaian Pengaduan: Admin dapat menyelesaikan pengaduan dan mengubah statusnya menjadi "ditutup".
+
+
 
 ![Logo](https://live.staticflickr.com/65535/53051589442_62d2c8e4b2_z.jpg)
 
